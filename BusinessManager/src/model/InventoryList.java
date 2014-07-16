@@ -42,7 +42,9 @@ public class InventoryList {
         return item;
     }
     
-    
+    public void removeItemAtIndex (int index) {
+        list.remove(index);
+    }
     
     
     

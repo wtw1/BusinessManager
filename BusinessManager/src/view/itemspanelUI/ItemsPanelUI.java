@@ -41,6 +41,13 @@ public class ItemsPanelUI extends javax.swing.JPanel {
     public Item getSelectedItem() {
         return inventoryList.getItemAtIndex(jInventoryList.getSelectedIndex());
     }
+    
+    public void removeSelectedItem() {
+        int selectedIndex = jInventoryList.getSelectedIndex();
+        this.deselectInventorySelection();
+        inventoryList.removeItemAtIndex(selectedIndex);
+        this.updateTableView();
+    }
 
     public void updateTableView() {
     jInventoryList.setModel(new javax.swing.AbstractListModel() {

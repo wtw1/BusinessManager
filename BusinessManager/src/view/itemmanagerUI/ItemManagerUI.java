@@ -17,6 +17,7 @@ public class ItemManagerUI extends javax.swing.JPanel {
         void itemManagerIsInEditMode();
         void itemManagerIsQuitEditMode();
         void itemManagerCreatedNewItem(Item newItem);
+        void itemManagerDeletedItem();
     }
     
     public void setDelegate(ItemManagerDelegate delegate) {
@@ -82,7 +83,7 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 jEditButton.setEnabled(true);
                 jCancelButton.setEnabled(false);
                 jUpdateAddButton.setEnabled(false);
-                jDeleteItemButton.setEnabled(true);
+                jDeleteItemButton.setEnabled(false);
                 jNewItemButton.setEnabled(true);
                 break;
                     
@@ -109,7 +110,7 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 jEditButton.setEnabled(false);
                 jCancelButton.setEnabled(true);
                 jUpdateAddButton.setEnabled(true);
-                jDeleteItemButton.setEnabled(false);
+                jDeleteItemButton.setEnabled(true);
                 jNewItemButton.setEnabled(false);
                 break;
                 
@@ -198,6 +199,11 @@ public class ItemManagerUI extends javax.swing.JPanel {
         });
 
         jDeleteItemButton.setText("Delete Item");
+        jDeleteItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDeleteItemButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -521,6 +527,14 @@ public class ItemManagerUI extends javax.swing.JPanel {
         this.delegate.itemManagerIsInEditMode();
         this.EnableItemFields();
     }//GEN-LAST:event_jEditButtonActionPerformed
+
+    private void jDeleteItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDeleteItemButtonActionPerformed
+        // TODO add your handling code here:
+        this.delegate.itemManagerDeletedItem();
+        this.clearItemFields();
+        this.setManagerState(ManagerState.NOTHINGSELECTED);
+        this.delegate.itemManagerIsQuitEditMode();
+    }//GEN-LAST:event_jDeleteItemButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

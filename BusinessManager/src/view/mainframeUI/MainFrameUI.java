@@ -47,6 +47,10 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
         itemManagerUI1.SetItemInManager(selectedItem);
     }
     
+    public void itemManagerDeletedItem() {
+        itemsPanelUI1.removeSelectedItem();
+    }
+    
     /**
      * Creates new form MainFrameUI
      */
