@@ -16,14 +16,10 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
     @Override
     public void itemManagerIsInEditMode() {
         System.out.println("EditMode"); 
-        
         itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.DISABLED);
-        
         if(itemManagerUI1.managerState == ItemManagerUI.ManagerState.NEWITEMISBEINGCREATED) {
             itemsPanelUI1.deselectInventorySelection();
-        }
-        
-        
+        }   
     }
     
     @Override
@@ -34,8 +30,13 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
     
     @Override
     public void itemManagerCreatedNewItem(Item newItem) {
-        itemsPanelUI1.inventoryList.addNewItem(newItem);
-        itemsPanelUI1.updateTableView();
+        if(itemManagerUI1.managerState == ItemManagerUI.ManagerState.NEWITEMISBEINGCREATED) {
+            itemsPanelUI1.inventoryList.addNewItem(newItem);
+            itemsPanelUI1.updateTableView();
+        } else if(itemManagerUI1.managerState == ItemManagerUI.ManagerState.ITEMISBEINGEDITED) {
+            Item selectedItem = itemsPanelUI1.getSelectedItem();
+            selectedItem.transformIntoItem(newItem);
+        }
     }
     
     //ItemSpaceDelegate 

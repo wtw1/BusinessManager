@@ -177,6 +177,11 @@ public class ItemManagerUI extends javax.swing.JPanel {
         });
 
         jEditButton.setText("Edit Item");
+        jEditButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEditButtonActionPerformed(evt);
+            }
+        });
 
         jUpdateAddButton.setText("Add/Update Item");
         jUpdateAddButton.addActionListener(new java.awt.event.ActionListener() {
@@ -477,28 +482,45 @@ public class ItemManagerUI extends javax.swing.JPanel {
         System.out.println("Cancel Pressed");
         this.delegate.itemManagerIsQuitEditMode();
         
-        if (this.managerState == ManagerState.NEWITEMISBEINGCREATED)
+        if (this.managerState == ManagerState.NEWITEMISBEINGCREATED){
             this.clearItemFields();
+            this.setManagerState(ManagerState.NOTHINGSELECTED);
+        }else {
+            this.setManagerState(ManagerState.INVENTORYITEMSELECTED);
+        }
         this.DisableItemFields();
-        this.setManagerState(ManagerState.NOTHINGSELECTED);
+        
     }//GEN-LAST:event_jCancelButtonActionPerformed
 
     private void jUpdateAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateAddButtonActionPerformed
         // TODO add your handling code here:
         System.out.println("Update/Add Pressed");
         
-        if (this.managerState == ManagerState.NEWITEMISBEINGCREATED) {
+        //if (this.managerState == ManagerState.NEWITEMISBEINGCREATED) {
             Item newItem = new Item();
             newItem.itemName = jItemNameTF.getText();
             this.delegate.itemManagerCreatedNewItem(newItem);
-        }
+        //} 
         
         this.DisableItemFields();
-        this.clearItemFields();
+        if(this.managerState == ManagerState.NEWITEMISBEINGCREATED) {
+            this.clearItemFields();
+            this.setManagerState(ManagerState.NOTHINGSELECTED);
+        } else {
+            this.setManagerState(ManagerState.INVENTORYITEMSELECTED);
+        }
         
-        this.setManagerState(ManagerState.NOTHINGSELECTED);
         this.delegate.itemManagerIsQuitEditMode();
     }//GEN-LAST:event_jUpdateAddButtonActionPerformed
+
+    private void jEditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEditButtonActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Edit Item Pressed");
+        
+        this.setManagerState(ManagerState.ITEMISBEINGEDITED);
+        this.delegate.itemManagerIsInEditMode();
+        this.EnableItemFields();
+    }//GEN-LAST:event_jEditButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -30,12 +30,16 @@ public class ItemsPanelUI extends javax.swing.JPanel {
     public ItemsPanelUI() {
         initComponents();
         inventoryList = new InventoryList(); //Model
-        itemsPaneState = ItemsPaneState.ENABLED;
+        setItemsPanelState(ItemsPaneState.ENABLED);
         this.updateTableView();
     }
     
     public void deselectInventorySelection() {
         jInventoryList.clearSelection();
+    }
+    
+    public Item getSelectedItem() {
+        return inventoryList.getItemAtIndex(jInventoryList.getSelectedIndex());
     }
 
     public void updateTableView() {

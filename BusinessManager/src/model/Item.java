@@ -23,6 +23,14 @@ public class Item {
         itemCount = count;
         itemName = name;
     }
+    
+    public void transformIntoItem(Item item){
+        this.itemName = item.itemName;
+        this.itemSellPrice = item.itemSellPrice;
+        this.itemBuyPrice = item.itemBuyPrice;
+        this.itemWeight = item.itemWeight;
+        this.itemCount = item.itemCount;
+    }
    
     public Item() {
         itemSellPrice = 1.25f;
