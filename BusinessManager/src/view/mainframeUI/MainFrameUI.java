@@ -12,12 +12,33 @@ import view.itemspanelUI.ItemsPanelUI;
 
 public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate {
 
+    //ItemManagerDelegate 
     @Override
-    public void newItemCreated() {
-        System.out.print("Created"); 
+    public void itemManagerIsInEditMode() {
+        System.out.println("EditMode"); 
+        
         itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.DISABLED);
+        
+        if(itemManagerUI1.managerState == ItemManagerUI.ManagerState.NEWITEMISBEINGCREATED) {
+            itemsPanelUI1.deselectInventorySelection();
+        }
+        
+        
     }
     
+    @Override
+    public void itemManagerIsQuitEditMode() {
+        System.out.println("EditMode"); 
+        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.ENABLED);
+    }
+    
+    @Override
+    public void itemManagerCreatedNewItem(Item newItem) {
+        itemsPanelUI1.inventoryList.addNewItem(newItem);
+        itemsPanelUI1.updateTableView();
+    }
+    
+    //ItemSpaceDelegate 
     @Override
     public void inventoryItemSelected(Item selectedItem) {
         System.out.print(selectedItem.getItemName()); 

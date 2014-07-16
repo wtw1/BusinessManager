@@ -7,7 +7,7 @@ import model.Item;
 public class ItemsPanelUI extends javax.swing.JPanel {
 
     private ItemsPanelDelegate delegate;
-    private InventoryList inventoryList;
+    public InventoryList inventoryList;
     private ItemsPaneState itemsPaneState;
     
     public interface ItemsPanelDelegate {
@@ -30,7 +30,12 @@ public class ItemsPanelUI extends javax.swing.JPanel {
     public ItemsPanelUI() {
         initComponents();
         inventoryList = new InventoryList(); //Model
+        itemsPaneState = ItemsPaneState.ENABLED;
         this.updateTableView();
+    }
+    
+    public void deselectInventorySelection() {
+        jInventoryList.clearSelection();
     }
 
     public void updateTableView() {
@@ -158,9 +163,11 @@ public class ItemsPanelUI extends javax.swing.JPanel {
 
     private void jInventoryListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jInventoryListValueChanged
         // TODO add your handling code here:
-        int selectedIndex = jInventoryList.getSelectedIndex();
-        Item selectedItem = this.inventoryList.getItemAtIndex(selectedIndex);
-        this.delegate.inventoryItemSelected(selectedItem);
+        if (itemsPaneState == ItemsPaneState.ENABLED) {
+            int selectedIndex = jInventoryList.getSelectedIndex();
+            Item selectedItem = this.inventoryList.getItemAtIndex(selectedIndex);
+            this.delegate.inventoryItemSelected(selectedItem);
+        }
     }//GEN-LAST:event_jInventoryListValueChanged
 
 
