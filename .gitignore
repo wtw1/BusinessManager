@@ -13,6 +13,6 @@ hs_err_pid*
 /BusinessManager/build/
 /BusinessManager/dist/
 /BusinessManager/nbproject/private/private.xml
-
+/BusinessManager/nbproject/private/
 .DS_Store
 *.DS_Store
