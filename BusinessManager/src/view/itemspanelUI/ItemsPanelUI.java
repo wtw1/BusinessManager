@@ -66,14 +66,14 @@ public class ItemsPanelUI extends javax.swing.JPanel {
                 System.out.println("ENABLED");
                 jInventoryList.setEnabled(true);
                 jShippedList.setEnabled(false);
-                jToShipList.setEnabled(false);
+                jSoldList.setEnabled(false);
                 break;
                     
             case DISABLED:
                 System.out.println("DISABLED");
                 jInventoryList.setEnabled(false);
                 jShippedList.setEnabled(false);
-                jToShipList.setEnabled(false);
+                jSoldList.setEnabled(false);
                 break;
         }
     }
@@ -89,11 +89,11 @@ public class ItemsPanelUI extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jInventoryList = new javax.swing.JList();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jInventoryLabel = new javax.swing.JLabel();
+        jSoldLabel = new javax.swing.JLabel();
+        jShippedLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jToShipList = new javax.swing.JList();
+        jSoldList = new javax.swing.JList();
         jScrollPane3 = new javax.swing.JScrollPane();
         jShippedList = new javax.swing.JList();
 
@@ -112,18 +112,18 @@ public class ItemsPanelUI extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jInventoryList);
 
-        jLabel1.setText("Inventory");
+        jInventoryLabel.setText("Inventory");
 
-        jLabel2.setText("To Ship");
+        jSoldLabel.setText("Sold");
 
-        jLabel3.setText("Shipped");
+        jShippedLabel.setText("Shipped");
 
-        jToShipList.setModel(new javax.swing.AbstractListModel() {
+        jSoldList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(jToShipList);
+        jScrollPane2.setViewportView(jSoldList);
 
         jShippedList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -137,22 +137,21 @@ public class ItemsPanelUI extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jLabel1)
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel2)
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jInventoryLabel)
+                .addGap(98, 98, 98)
+                .addComponent(jSoldLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jShippedLabel)
+                .addGap(49, 49, 49))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,9 +159,9 @@ public class ItemsPanelUI extends javax.swing.JPanel {
                 .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(jSoldLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jInventoryLabel))
+                    .addComponent(jShippedLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,14 +182,14 @@ public class ItemsPanelUI extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jInventoryLabel;
     private javax.swing.JList jInventoryList;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel jShippedLabel;
     private javax.swing.JList jShippedList;
-    private javax.swing.JList jToShipList;
+    private javax.swing.JLabel jSoldLabel;
+    private javax.swing.JList jSoldList;
     // End of variables declaration//GEN-END:variables
 }

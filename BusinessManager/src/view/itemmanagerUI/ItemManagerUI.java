@@ -6,6 +6,7 @@
 
 package view.itemmanagerUI;
 
+import javax.swing.JOptionPane;
 import model.Item;
 
 public class ItemManagerUI extends javax.swing.JPanel {
@@ -478,6 +479,7 @@ public class ItemManagerUI extends javax.swing.JPanel {
         this.setManagerState(ManagerState.NEWITEMISBEINGCREATED);
         this.delegate.itemManagerIsInEditMode();
         
+        jItemCountTF.setText("0");
         this.EnableItemFields();
         
         
@@ -501,13 +503,22 @@ public class ItemManagerUI extends javax.swing.JPanel {
     private void jUpdateAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateAddButtonActionPerformed
         // TODO add your handling code here:
         System.out.println("Update/Add Pressed");
-        
-        //if (this.managerState == ManagerState.NEWITEMISBEINGCREATED) {
-            Item newItem = new Item();
-            newItem.itemName = jItemNameTF.getText();
-            this.delegate.itemManagerCreatedNewItem(newItem);
-        //} 
-        
+        boolean isValidItem = false;
+        Item newItem = new Item();
+        while (!isValidItem) {
+            try {        
+                newItem.itemName = jItemNameTF.getText();
+                newItem.itemBuyPrice = Float.parseFloat(jItemStockPriceTF.getText());
+                newItem.itemSellPrice = Float.parseFloat(jItemSellPriceTF.getText());
+                newItem.itemCount = Integer.parseInt(jItemCountTF.getText());
+                newItem.itemWeight = Float.parseFloat(jItemWeightTF.getText());
+                isValidItem = true;
+            } catch(NumberFormatException e) { 
+                JOptionPane.showMessageDialog(null, "Fix Item Fields");
+                return;
+            }
+        }
+        this.delegate.itemManagerCreatedNewItem(newItem);
         this.DisableItemFields();
         if(this.managerState == ManagerState.NEWITEMISBEINGCREATED) {
             this.clearItemFields();
@@ -532,6 +543,7 @@ public class ItemManagerUI extends javax.swing.JPanel {
         // TODO add your handling code here:
         this.delegate.itemManagerDeletedItem();
         this.clearItemFields();
+        this.DisableItemFields();
         this.setManagerState(ManagerState.NOTHINGSELECTED);
         this.delegate.itemManagerIsQuitEditMode();
     }//GEN-LAST:event_jDeleteItemButtonActionPerformed
