@@ -9,6 +9,7 @@ package view.mainframeUI;
 import model.Item;
 import view.itemmanagerUI.ItemManagerUI;
 import view.itemspanelUI.ItemsPanelUI;
+import view.storeDialogUI.StoreDialogUI;
 
 public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate {
 
@@ -71,14 +72,31 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
 
         itemManagerUI1 = new view.itemmanagerUI.ItemManagerUI();
         itemsPanelUI1 = new view.itemspanelUI.ItemsPanelUI();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jOpenStore = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu1.setText("File");
+
+        jOpenStore.setText("Open Store");
+        jOpenStore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jOpenStoreActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jOpenStore);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(itemsPanelUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -95,11 +113,17 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
                     .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(itemsPanelUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jOpenStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOpenStoreActionPerformed
+        // TODO add your handling code here:
+        StoreDialogUI store = new StoreDialogUI(this,true);
+        store.setVisible(true);
+    }//GEN-LAST:event_jOpenStoreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,6 +141,9 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.itemmanagerUI.ItemManagerUI itemManagerUI1;
     private view.itemspanelUI.ItemsPanelUI itemsPanelUI1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jOpenStore;
     // End of variables declaration//GEN-END:variables
 
 

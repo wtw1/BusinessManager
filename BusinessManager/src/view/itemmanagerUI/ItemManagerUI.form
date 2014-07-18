@@ -352,18 +352,18 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                                  <Component id="jButton3" min="-2" pref="84" max="-2" attributes="0"/>
+                                  <Component id="jSalesButton" min="-2" pref="84" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton6" min="-2" pref="84" max="-2" attributes="0"/>
+                                  <Component id="jMakeSaleButton" min="-2" pref="84" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jTextField1" min="-2" pref="79" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton5" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="jRemoveSaleButton" min="-2" pref="22" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton4" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="jAddSalesButton" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -381,13 +381,13 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextField1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jButton5" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="jRemoveSaleButton" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="jAddSalesButton" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSalesButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jMakeSaleButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -395,7 +395,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="jSalesButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sale"/>
           </Properties>
@@ -405,12 +405,12 @@
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="jAddSalesButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="&gt;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton5">
+        <Component class="javax.swing.JButton" name="jRemoveSaleButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="&lt;"/>
           </Properties>
@@ -428,7 +428,7 @@
             <Property name="text" type="java.lang.String" value="Count:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton6">
+        <Component class="javax.swing.JButton" name="jMakeSaleButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Done"/>
           </Properties>

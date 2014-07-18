@@ -86,6 +86,8 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 jUpdateAddButton.setEnabled(false);
                 jDeleteItemButton.setEnabled(false);
                 jNewItemButton.setEnabled(true);
+                jMakeSaleButton.setEnabled(false);
+                jSalesButton.setEnabled(true);
                 break;
                     
             case NOTHINGSELECTED:
@@ -95,6 +97,8 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 jUpdateAddButton.setEnabled(false);
                 jDeleteItemButton.setEnabled(false);
                 jNewItemButton.setEnabled(true);
+                jMakeSaleButton.setEnabled(false);
+                jSalesButton.setEnabled(false);
                 break;
                          
             case NEWITEMISBEINGCREATED:
@@ -104,6 +108,8 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 jUpdateAddButton.setEnabled(true);
                 jDeleteItemButton.setEnabled(false);
                 jNewItemButton.setEnabled(false);
+                jMakeSaleButton.setEnabled(false);
+                jSalesButton.setEnabled(false);
                 break;
                         
             case ITEMISBEINGEDITED:
@@ -113,6 +119,8 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 jUpdateAddButton.setEnabled(true);
                 jDeleteItemButton.setEnabled(true);
                 jNewItemButton.setEnabled(false);
+                jMakeSaleButton.setEnabled(false);
+                jSalesButton.setEnabled(false);
                 break;
                 
             default:
@@ -154,13 +162,13 @@ public class ItemManagerUI extends javax.swing.JPanel {
         jAddCountButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
+        jSalesButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jAddSalesButton = new javax.swing.JButton();
+        jRemoveSaleButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        jMakeSaleButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -355,20 +363,20 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jButton3.setText("Sale");
+        jSalesButton.setText("Sale");
 
         jTextField1.setEditable(false);
 
-        jButton4.setText(">");
+        jAddSalesButton.setText(">");
 
-        jButton5.setText("<");
+        jRemoveSaleButton.setText("<");
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel3.setText("Sales Manager");
 
         jLabel10.setText("Count:");
 
-        jButton6.setText("Done");
+        jMakeSaleButton.setText("Done");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -384,17 +392,17 @@ public class ItemManagerUI extends javax.swing.JPanel {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSalesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jMakeSaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jRemoveSaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jAddSalesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -406,12 +414,12 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRemoveSaleButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jAddSalesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton6))
+                    .addComponent(jSalesButton)
+                    .addComponent(jMakeSaleButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -551,11 +559,8 @@ public class ItemManagerUI extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAddCountButton;
+    private javax.swing.JButton jAddSalesButton;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jCancelButton;
     private javax.swing.JButton jDeleteItemButton;
     private javax.swing.JButton jEditButton;
@@ -576,12 +581,15 @@ public class ItemManagerUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton jMakeSaleButton;
     private javax.swing.JButton jNewItemButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JButton jRemoveCountButton;
+    private javax.swing.JButton jRemoveSaleButton;
+    private javax.swing.JButton jSalesButton;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jUpdateAddButton;
     // End of variables declaration//GEN-END:variables
