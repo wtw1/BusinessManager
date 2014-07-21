@@ -7,13 +7,27 @@
 package view.mainframeUI;
 
 import model.Item;
+import model.User;
+import view.initloginUI.InitLoginJDialog;
 import view.itemmanagerUI.ItemManagerUI;
 import view.itemspanelUI.ItemsPanelUI;
 import view.storeDialogUI.StoreDialogUI;
-import view.initloginUI.InitLoginJDialog;
 
-public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate {
-
+public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, 
+                                                               view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate,
+                                                               view.initloginUI.InitLoginJDialog.LoginDelegate {
+    private InitLoginJDialog login;
+    public User user; 
+    
+    //LoginDelegate
+    @Override
+    public void loginWithUser(User user) {
+        
+        itemsPanelUI1.inventoryList = user.inventory;
+        //itemsPanelUI1.updateTableView();
+    }
+    
+    
     //ItemManagerDelegate 
     @Override
     public void itemManagerIsInEditMode() {
@@ -60,7 +74,9 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
         initComponents();
         itemManagerUI1.setDelegate(this);
         itemsPanelUI1.setDelegate(this);
+        
         login = new InitLoginJDialog(this,true);
+        login.setDelegate(this);
     }
         
     /**
@@ -77,22 +93,14 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
         itemsPanelUI1 = new view.itemspanelUI.ItemsPanelUI();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jOpenStore = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jOpenStore = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu1.setText("File");
-
-        jOpenStore.setText("Open Store");
-        jOpenStore.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jOpenStoreActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jOpenStore);
 
         jMenuItem2.setText("Login");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +109,14 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jOpenStore.setText("Open Store");
+        jOpenStore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jOpenStoreActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jOpenStore);
 
         jMenuBar1.add(jMenu1);
 
@@ -167,10 +183,6 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jOpenStore;
     // End of variables declaration//GEN-END:variables
-    private InitLoginJDialog login;
-
-
-
-
+    
 
 }
