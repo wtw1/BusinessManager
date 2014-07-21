@@ -24,7 +24,8 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
     public void loginWithUser(User user) {
         
         itemsPanelUI1.inventoryList = user.inventory;
-        //itemsPanelUI1.updateTableView();
+        itemsPanelUI1.updateTableView();
+        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.ENABLED);
     }
     
     
@@ -157,7 +158,8 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        
+        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.DISABLED);
+        itemsPanelUI1.deselectInventorySelection();
         login.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
