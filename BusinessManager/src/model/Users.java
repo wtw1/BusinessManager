@@ -10,10 +10,13 @@ public class Users {
     public Users() {
         
         userslist = new ArrayList();
-        
+        String[] StringArray = new String[3];
+        StringArray[0] = "Wayne";
+        StringArray[1] = "Jacob";
+        StringArray[2] = "Chris";
         for (int i=0; i<3; i++){
             User user = new User();
-            user.id = Integer.toString(i);
+            user.SetID(StringArray[i]);
             userslist.add(user);
         }
     }
