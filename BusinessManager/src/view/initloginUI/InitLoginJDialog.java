@@ -172,9 +172,9 @@ public class InitLoginJDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     
-       public void reloadUsersBox() {
-        
+    public void reloadUsersBox() {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { users.getUserAtIndex(0).GetID(), 
                                                                                 users.getUserAtIndex(1).GetID(), 
                                                                                 users.getUserAtIndex(2).GetID()}));
     }
+}
