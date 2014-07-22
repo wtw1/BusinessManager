@@ -3,8 +3,8 @@ package model;
 
 public class User {
     
-    public String id;
-    public String pw;
+    private String id;
+    private String pw;
     
     public InventoryList inventory;
     
@@ -14,5 +14,20 @@ public class User {
         
         inventory = new InventoryList();
     }
-    
+    public void SetID(String name)
+    {
+        this.id = name;
+    }
+    public void SetPw(String name)
+    {
+        this.pw = name;
+    }
+    public String GetID()
+    {
+        return this.id;
+    }
+    public String GetPw()
+    {
+        return this.pw;
+    }
 }
