@@ -65,14 +65,14 @@ public class ItemsPanelUI extends javax.swing.JPanel {
             case ENABLED:
                 System.out.println("ENABLED");
                 jInventoryList.setEnabled(true);
-                jShippedList.setEnabled(false);
+                //jShippedList.setEnabled(false);
                 jSoldList.setEnabled(false);
                 break;
                     
             case DISABLED:
                 System.out.println("DISABLED");
                 jInventoryList.setEnabled(false);
-                jShippedList.setEnabled(false);
+                //jShippedList.setEnabled(false);
                 jSoldList.setEnabled(false);
                 break;
         }
@@ -91,15 +91,13 @@ public class ItemsPanelUI extends javax.swing.JPanel {
         jInventoryList = new javax.swing.JList();
         jInventoryLabel = new javax.swing.JLabel();
         jSoldLabel = new javax.swing.JLabel();
-        jShippedLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jSoldList = new javax.swing.JList();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jShippedList = new javax.swing.JList();
 
         setBackground(new java.awt.Color(204, 204, 204));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        jInventoryList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jInventoryList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -116,21 +114,13 @@ public class ItemsPanelUI extends javax.swing.JPanel {
 
         jSoldLabel.setText("Sold");
 
-        jShippedLabel.setText("Shipped");
-
+        jSoldList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jSoldList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(jSoldList);
-
-        jShippedList.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(jShippedList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -141,32 +131,25 @@ public class ItemsPanelUI extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(jInventoryLabel)
                 .addGap(98, 98, 98)
                 .addComponent(jSoldLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jShippedLabel)
-                .addGap(49, 49, 49))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSoldLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jInventoryLabel))
-                    .addComponent(jShippedLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jSoldLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jInventoryLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -186,9 +169,6 @@ public class ItemsPanelUI extends javax.swing.JPanel {
     private javax.swing.JList jInventoryList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel jShippedLabel;
-    private javax.swing.JList jShippedList;
     private javax.swing.JLabel jSoldLabel;
     private javax.swing.JList jSoldList;
     // End of variables declaration//GEN-END:variables
