@@ -1,6 +1,7 @@
 
 package model;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
 
 public class Users {
@@ -18,6 +19,9 @@ public class Users {
             User user = new User();
             user.SetID(StringArray[i]);
             userslist.add(user);
+            Gson gson = new Gson();  
+            
+            System.out.println(gson.toJson(user));  
         }
     }
     
