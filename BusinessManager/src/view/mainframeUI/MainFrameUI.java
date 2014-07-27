@@ -6,6 +6,9 @@
 
 package view.mainframeUI;
 
+import java.io.PrintWriter;
+import java.net.Socket;
+
 import model.Item;
 import model.User;
 import view.initloginUI.InitLoginJDialog;
@@ -17,11 +20,14 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
                                                                view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate,
                                                                view.initloginUI.InitLoginJDialog.LoginDelegate {
     private InitLoginJDialog login;
-    public User user; 
+    public User currentUser; 
     
     //LoginDelegate
     @Override
     public void loginWithUser(User user) {
+        
+        currentUser = user;
+        jNameLabel.setText(user.GetID());
         
         itemsPanelUI1.inventoryList = user.inventory;
         itemsPanelUI1.updateTableView();
@@ -95,10 +101,11 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jNameLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jPushUser = new javax.swing.JMenuItem();
         jOpenStore = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -110,9 +117,9 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
 
         jLabel1.setText("Account Name:");
 
-        jLabel2.setText("Sales: $123.67");
+        jLabel2.setText("Sales: $0.00");
 
-        jLabel3.setText("Jacob");
+        jNameLabel.setText("Jacob");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,7 +131,7 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -133,7 +140,7 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel3))
+                    .addComponent(jNameLabel))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(23, 23, 23))
@@ -148,6 +155,14 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jPushUser.setText("Push User");
+        jPushUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPushUserActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jPushUser);
 
         jOpenStore.setText("Open Store");
         jOpenStore.addActionListener(new java.awt.event.ActionListener() {
@@ -170,21 +185,23 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(itemsPanelUI1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(itemManagerUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(itemManagerUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(48, 48, 48)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(itemsPanelUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(itemsPanelUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(itemManagerUI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,6 +219,30 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
         itemsPanelUI1.deselectInventorySelection();
         login.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jPushUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPushUserActionPerformed
+        // TODO add your handling code here:
+        try {
+            final int PORT = 1025;
+            final String HOST = "localhost";
+            Socket SOCK = new Socket (HOST,PORT);
+            System.out.println("You Connected to: " + HOST);
+            
+            //AppClient = 
+            
+            PrintWriter OUT = new PrintWriter(SOCK.getOutputStream());
+            OUT.println(this.currentUser.toJson());
+            OUT.flush();
+            
+            //Thread X = new Thread(AppClient);
+            //X.start();
+            
+        }
+        catch(Exception X) {
+            System.out.println(X);
+            
+        }
+    }//GEN-LAST:event_jPushUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,13 +262,14 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
     private view.itemspanelUI.ItemsPanelUI itemsPanelUI1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JLabel jNameLabel;
     private javax.swing.JMenuItem jOpenStore;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jPushUser;
     // End of variables declaration//GEN-END:variables
     
 

@@ -14,7 +14,7 @@ public class InventoryList {
         for (int i=0; i<5; i++){
             Item item = new Item();
             item.itemName = "Random Item" + i;
-            //item.itemID = i;
+            item.itemCount = i;
             item.itemWeight = item.itemWeight*i;
             list.add(item);
         }

@@ -1,6 +1,8 @@
 
 package model;
 
+import com.google.gson.Gson;
+
 public class User {
     
     private String id;
@@ -29,5 +31,11 @@ public class User {
     public String GetPw()
     {
         return this.pw;
+    }
+    
+    public String toJson() {
+        Gson gson = new Gson();  
+        String json = gson.toJson(this); 
+        return json;
     }
 }
