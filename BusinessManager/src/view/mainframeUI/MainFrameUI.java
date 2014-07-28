@@ -22,7 +22,6 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
     private InitLoginJDialog login;
     public User currentUser; 
     public AppClient sellerClient;
-    Boolean sellerClientIsNotNull = false;
     
     //LoginDelegate
     @Override
@@ -121,7 +120,7 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
 
         jLabel2.setText("Sales: $0.00");
 
-        jNameLabel.setText("Jacob");
+        jNameLabel.setText("Null");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -224,8 +223,8 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
 
     private void jPushUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPushUserActionPerformed
         // TODO add your handling code here:
-        if(sellerClientIsNotNull == false){
-            sellerClientIsNotNull = true;
+        if(sellerClient == null && currentUser != null){
+            
             System.out.println("HSHDHSJHDJSAHGDJHA");
         try {
             final int PORT = 1025;
@@ -246,10 +245,12 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
         }
         catch(Exception X) {
             System.out.println(X);
-            sellerClientIsNotNull = false;
+            
         }
         } else {
-            sellerClient.SEND(this.currentUser.toJson());
+            if(currentUser != null && sellerClient != null) {
+                sellerClient.SEND(this.currentUser.toJson());
+            } else System.out.println("Pls Login With a User.");
         }
     }//GEN-LAST:event_jPushUserActionPerformed
 
