@@ -8,7 +8,7 @@ package view.mainframeUI;
 
 import java.io.PrintWriter;
 import java.net.Socket;
-
+import model.AppClient;
 import model.Item;
 import model.User;
 import view.initloginUI.InitLoginJDialog;
@@ -21,6 +21,8 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
                                                                view.initloginUI.InitLoginJDialog.LoginDelegate {
     private InitLoginJDialog login;
     public User currentUser; 
+    public AppClient sellerClient;
+    Boolean sellerClientIsNotNull = false;
     
     //LoginDelegate
     @Override
@@ -222,25 +224,32 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
 
     private void jPushUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPushUserActionPerformed
         // TODO add your handling code here:
+        if(sellerClientIsNotNull == false){
+            sellerClientIsNotNull = true;
+            System.out.println("HSHDHSJHDJSAHGDJHA");
         try {
             final int PORT = 1025;
             final String HOST = "localhost";
             Socket SOCK = new Socket (HOST,PORT);
             System.out.println("You Connected to: " + HOST);
             
-            //AppClient = 
+            
+            sellerClient = new AppClient(SOCK);
             
             PrintWriter OUT = new PrintWriter(SOCK.getOutputStream());
             OUT.println(this.currentUser.toJson());
             OUT.flush();
             
-            //Thread X = new Thread(AppClient);
-            //X.start();
+            Thread X = new Thread(sellerClient);
+            X.start();
             
         }
         catch(Exception X) {
             System.out.println(X);
-            
+            sellerClientIsNotNull = false;
+        }
+        } else {
+            sellerClient.SEND(this.currentUser.toJson());
         }
     }//GEN-LAST:event_jPushUserActionPerformed
 
