@@ -1,14 +1,18 @@
 package serverpackage;
 
+import com.google.gson.Gson;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.User;
+import model.Users;
 
 public class SOK_1_SERVER {
     
     public static ArrayList<Socket> ConnectionArray = new ArrayList<Socket>();
     public static ArrayList<String> CurrentUsers = new ArrayList<String>();
+    public static Users serverUsers = new Users(); 
     
     public static void main(String[] args) throws Exception {
         SOK_1_SERVER SERVER = new SOK_1_SERVER();
@@ -42,8 +46,21 @@ public class SOK_1_SERVER {
     public static void AddUserName(Socket X)throws IOException {
         Scanner INPUT = new Scanner(X.getInputStream()); 
         String UserName = INPUT.nextLine();
-        CurrentUsers.add(UserName);
         System.out.println(UserName);
+        
+        //convert the json string back to object
+        try {
+        Gson gson = new Gson();
+        User obj = gson.fromJson(UserName, User.class);
+	System.out.println(obj.GetID());
+        
+        serverUsers.addUserToList(obj);
+        
+        //CurrentUsers.add(UserName);
+        //System.out.println(UserName);
+        } catch (Exception e) {
+		System.out.println(e);
+	}
         
         for (int i=0; i < SOK_1_SERVER.ConnectionArray.size(); i++) {
             Socket TEMP_SOCK = (Socket) SOK_1_SERVER.ConnectionArray.get(i);

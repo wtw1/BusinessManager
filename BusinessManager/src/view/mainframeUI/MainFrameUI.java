@@ -8,7 +8,6 @@ package view.mainframeUI;
 
 import java.io.PrintWriter;
 import java.net.Socket;
-import model.AppClient;
 import model.Item;
 import model.User;
 import view.initloginUI.InitLoginJDialog;

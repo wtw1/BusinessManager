@@ -1,5 +1,5 @@
 
-package model;
+package view.mainframeUI;
 
 import java.io.*;
 import java.net.*;

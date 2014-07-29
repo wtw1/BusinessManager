@@ -26,4 +26,8 @@ public class Users {
         return user;
     }
     
+    public void addUserToList(User user) {
+        userslist.add(user);
+    }
+    
 }
