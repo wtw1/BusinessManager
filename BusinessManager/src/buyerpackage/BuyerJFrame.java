@@ -8,7 +8,9 @@ package buyerpackage;
 
 import java.io.PrintWriter;
 import java.net.Socket;
+
 import model.User;
+import model.Users;
 
 
 /**
@@ -18,6 +20,7 @@ import model.User;
 public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.BuyerClientDelegate {
 
     public BuyerClient buyerClient;
+    public Users sellersList;
     /**
      * Creates new form BuyerJFrame
      */
@@ -25,15 +28,29 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
         initComponents();
         connectToServer();
         buyerClient.setDelegate(this);
+        
+        sellersList = new Users();
+        sellersList.userslist.clear();
     }
     
     @Override
     public void newUserAdded(User x) {
-        reloadUsersBox(x.GetID());
+        
+        sellersList.addUserToList(x);
+        System.out.println("dddd"+x.GetID());
+        reloadUsersBox();
     }
     
-    public void reloadUsersBox(String N) {
-        jSellers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { N }));
+    public void reloadUsersBox() {
+        
+        String[] nameStrings = new String[sellersList.userslist.size()];
+        for(int i=0;i<sellersList.userslist.size();i++) {
+            User aUser = sellersList.getUserAtIndex(i);
+            nameStrings[i] = aUser.GetID();
+            System.out.println("dddd"+aUser.GetID());
+        }
+        
+        jSellers.setModel(new javax.swing.DefaultComboBoxModel(nameStrings));
     }
 
     /**

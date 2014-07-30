@@ -60,16 +60,17 @@ public class BuyerClient implements Runnable{
             
             if(MESSAGE.contains("#?!")) {
                 //set users
-            } else {
-                //add message
+                MESSAGE = MESSAGE.replace("#?!", "");
+                System.out.println(MESSAGE);
                 try {
                     Gson gson = new Gson();
                     User obj = gson.fromJson(MESSAGE, User.class);
                     System.out.println(obj.GetID());
                     delegate.newUserAdded(obj);
-                    //CurrentUsers.add(UserName);
-                    //System.out.println("Message "+ obj.GetID());
                 } catch (Exception e) {System.out.println(e);}
+            } else {
+                //update user
+
             }
         }
     }

@@ -30,7 +30,7 @@ public class ItemsPanelUI extends javax.swing.JPanel {
     public ItemsPanelUI() {
         initComponents();
         inventoryList = new InventoryList(); //Model
-        setItemsPanelState(ItemsPaneState.ENABLED);
+        setItemsPanelState(ItemsPaneState.DISABLED);
         this.updateTableView();
     }
     
@@ -103,6 +103,7 @@ public class ItemsPanelUI extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jInventoryList.setEnabled(false);
         jInventoryList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jInventoryListValueChanged(evt);
@@ -120,6 +121,7 @@ public class ItemsPanelUI extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jSoldList.setEnabled(false);
         jScrollPane2.setViewportView(jSoldList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

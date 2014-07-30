@@ -26,7 +26,7 @@ public class ItemManagerUI extends javax.swing.JPanel {
     }
     
     public enum ManagerState {
-    INVENTORYITEMSELECTED, NOTHINGSELECTED, NEWITEMISBEINGCREATED, ITEMISBEINGEDITED
+    INVENTORYITEMSELECTED, NOTHINGSELECTED, NEWITEMISBEINGCREATED, ITEMISBEINGEDITED, NOUSER
     }
     
     public void setManagerState(ManagerState state) {
@@ -38,7 +38,7 @@ public class ItemManagerUI extends javax.swing.JPanel {
     public ItemManagerUI() {
         initComponents();
         this.DisableItemFields();
-        this.managerState = ManagerState.NOTHINGSELECTED;
+        this.managerState = ManagerState.NOUSER;
         this.updateButtonsStates();
     }
     
@@ -115,6 +115,16 @@ public class ItemManagerUI extends javax.swing.JPanel {
                 jCancelButton.setEnabled(true);
                 jUpdateAddButton.setEnabled(true);
                 jDeleteItemButton.setEnabled(true);
+                jNewItemButton.setEnabled(false);
+
+                break;
+                
+            case NOUSER:
+                System.out.println("NOUSER");
+                jEditButton.setEnabled(false);
+                jCancelButton.setEnabled(false);
+                jUpdateAddButton.setEnabled(false);
+                jDeleteItemButton.setEnabled(false);
                 jNewItemButton.setEnabled(false);
 
                 break;

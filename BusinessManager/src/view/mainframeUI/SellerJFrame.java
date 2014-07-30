@@ -13,26 +13,25 @@ import model.User;
 import view.initloginUI.InitLoginJDialog;
 import view.itemmanagerUI.ItemManagerUI;
 import view.itemspanelUI.ItemsPanelUI;
-import view.storeDialogUI.StoreDialogUI;
+//import view.storeDialogUI.StoreDialogUI;
 
 public class SellerJFrame extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, 
-                                                               view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate,
-                                                               view.initloginUI.InitLoginJDialog.LoginDelegate {
+                                                               view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate {
     private InitLoginJDialog login;
     public User currentUser; 
     public AppClient sellerClient;
     
     //LoginDelegate
-    @Override
-    public void loginWithUser(User user) {
-        
-        currentUser = user;
-        jNameLabel.setText(user.GetID());
-        
-        itemsPanelUI1.inventoryList = user.inventory;
-        itemsPanelUI1.updateTableView();
-        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.ENABLED);
-    }
+//    @Override
+//    public void loginWithUser(User user) {
+//        
+//        currentUser = user;
+//        //jNameLabel.setText(user.GetID());
+//        
+//        itemsPanelUI1.inventoryList = user.inventory;
+//        itemsPanelUI1.updateTableView();
+//        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.ENABLED);
+//    }
     
     
     //ItemManagerDelegate 
@@ -83,7 +82,7 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
         itemsPanelUI1.setDelegate(this);
         
         login = new InitLoginJDialog(this,true);
-        login.setDelegate(this);
+        //login.setDelegate(this);
     }
         
     /**
@@ -101,12 +100,12 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jNameLabel = new javax.swing.JLabel();
+        jLoginButton = new javax.swing.JButton();
+        jNewUserButton = new javax.swing.JButton();
+        jUserTextField = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jPushUser = new javax.swing.JMenuItem();
-        jOpenStore = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -119,7 +118,23 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
 
         jLabel2.setText("Sales: $0.00");
 
-        jNameLabel.setText("Null");
+        jLoginButton.setText("Login");
+        jLoginButton.setEnabled(false);
+        jLoginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLoginButtonActionPerformed(evt);
+            }
+        });
+
+        jNewUserButton.setText("New");
+        jNewUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jNewUserButtonActionPerformed(evt);
+            }
+        });
+
+        jUserTextField.setEditable(false);
+        jUserTextField.setText("Null");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,8 +146,14 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jNewUserButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLoginButton))
+                    .addComponent(jUserTextField))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,37 +161,26 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jNameLabel))
+                    .addComponent(jUserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(23, 23, 23))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLoginButton)
+                        .addComponent(jNewUserButton))))
         );
 
         jMenu1.setText("File");
 
-        jMenuItem2.setText("Login");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem2);
-
-        jPushUser.setText("Push User");
+        jPushUser.setText("Send Update");
         jPushUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPushUserActionPerformed(evt);
             }
         });
         jMenu1.add(jPushUser);
-
-        jOpenStore.setText("Open Store");
-        jOpenStore.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jOpenStoreActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jOpenStore);
 
         jMenuBar1.add(jMenu1);
 
@@ -207,24 +217,67 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jOpenStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOpenStoreActionPerformed
-        // TODO add your handling code here:
-        StoreDialogUI store = new StoreDialogUI(this,true);
-        store.setVisible(true);
-    }//GEN-LAST:event_jOpenStoreActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.DISABLED);
-        itemsPanelUI1.deselectInventorySelection();
-        login.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jPushUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPushUserActionPerformed
         // TODO add your handling code here:
+        connect();
+    }//GEN-LAST:event_jPushUserActionPerformed
+    
+    private void jNewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNewUserButtonActionPerformed
+        // TODO add your handling code here:
+        jUserTextField.setEditable(true);
+        jUserTextField.requestFocus();
+        
+        jNewUserButton.setEnabled(false);
+        jLoginButton.setEnabled(true);
+    }//GEN-LAST:event_jNewUserButtonActionPerformed
+
+    private void jLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginButtonActionPerformed
+        // TODO add your handling code here:       
+        jLoginButton.setEnabled(false);
+        jUserTextField.setEditable(false);
+        
+        currentUser = new User();
+        currentUser.SetID(jUserTextField.getText());
+        
+        itemsPanelUI1.inventoryList = currentUser.inventory;
+        itemsPanelUI1.updateTableView();
+        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.ENABLED);
+        
+        connect();
+    }//GEN-LAST:event_jLoginButtonActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new SellerJFrame().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.itemmanagerUI.ItemManagerUI itemManagerUI1;
+    private view.itemspanelUI.ItemsPanelUI itemsPanelUI1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jLoginButton;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JButton jNewUserButton;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jPushUser;
+    private javax.swing.JTextField jUserTextField;
+    // End of variables declaration//GEN-END:variables
+    
+    private void connect() {
         if(sellerClient == null && currentUser != null){
             
-            System.out.println("HSHDHSJHDJSAHGDJHA");
+        System.out.println("HSHDHSJHDJSAHGDJHA");
         try {
             final int PORT = 1025;
             final String HOST = "localhost";
@@ -251,35 +304,6 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
                 sellerClient.SEND(this.currentUser.toJson());
             } else System.out.println("Pls Login With a User.");
         }
-    }//GEN-LAST:event_jPushUserActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SellerJFrame().setVisible(true);
-            }
-        });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.itemmanagerUI.ItemManagerUI itemManagerUI1;
-    private view.itemspanelUI.ItemsPanelUI itemsPanelUI1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JLabel jNameLabel;
-    private javax.swing.JMenuItem jOpenStore;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JMenuItem jPushUser;
-    // End of variables declaration//GEN-END:variables
     
-
 }
