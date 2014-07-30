@@ -15,7 +15,7 @@ import view.itemmanagerUI.ItemManagerUI;
 import view.itemspanelUI.ItemsPanelUI;
 import view.storeDialogUI.StoreDialogUI;
 
-public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, 
+public class SellerJFrame extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, 
                                                                view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate,
                                                                view.initloginUI.InitLoginJDialog.LoginDelegate {
     private InitLoginJDialog login;
@@ -77,7 +77,7 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
     /**
      * Creates new form MainFrameUI
      */
-    public MainFrameUI() {
+    public SellerJFrame() {
         initComponents();
         itemManagerUI1.setDelegate(this);
         itemsPanelUI1.setDelegate(this);
@@ -261,7 +261,7 @@ public class MainFrameUI extends javax.swing.JFrame implements view.itemmanagerU
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrameUI().setVisible(true);
+                new SellerJFrame().setVisible(true);
             }
         });
     }

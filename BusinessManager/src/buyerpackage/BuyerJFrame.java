@@ -8,21 +8,32 @@ package buyerpackage;
 
 import java.io.PrintWriter;
 import java.net.Socket;
-import view.mainframeUI.AppClient;
+import model.User;
+
 
 /**
  *
  * @author cosmicray
  */
-public class BuyerJFrame extends javax.swing.JFrame {
+public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.BuyerClientDelegate {
 
-    public AppClient buyerClient;
+    public BuyerClient buyerClient;
     /**
      * Creates new form BuyerJFrame
      */
     public BuyerJFrame() {
         initComponents();
         connectToServer();
+        buyerClient.setDelegate(this);
+    }
+    
+    @Override
+    public void newUserAdded(User x) {
+        reloadUsersBox(x.GetID());
+    }
+    
+    public void reloadUsersBox(String N) {
+        jSellers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { N }));
     }
 
     /**
@@ -34,21 +45,21 @@ public class BuyerJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
+        jSellers = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jInventoryList = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jSellers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        jInventoryList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(jInventoryList);
 
         jButton1.setText("Buy");
 
@@ -61,7 +72,7 @@ public class BuyerJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSellers, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
                 .addContainerGap(38, Short.MAX_VALUE))
@@ -70,7 +81,7 @@ public class BuyerJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSellers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -101,7 +112,7 @@ public class BuyerJFrame extends javax.swing.JFrame {
             Socket SOCK = new Socket (HOST,PORT);
             System.out.println("You Connected to: " + HOST);
             
-            buyerClient = new AppClient(SOCK);
+            buyerClient = new BuyerClient(SOCK);
             
             PrintWriter OUT = new PrintWriter(SOCK.getOutputStream());
             OUT.println("Hello server from buyer");
@@ -119,8 +130,8 @@ public class BuyerJFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JList jList1;
+    private javax.swing.JList jInventoryList;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox jSellers;
     // End of variables declaration//GEN-END:variables
 }
