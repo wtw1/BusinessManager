@@ -5,6 +5,7 @@
         <group>
             <file>file:/Users/cosmicray/NetBeansProjects/BusinessManager/BusinessManager/src/view/mainframeUI/AppClient.java</file>
             <file>file:/Users/cosmicray/NetBeansProjects/BusinessManager/BusinessManager/src/view/itemmanagerUI/ItemManagerUI.java</file>
+            <file>file:/Users/cosmicray/NetBeansProjects/BusinessManager/BusinessManager/src/view/itemspanelUI/ItemsPanelUI.java</file>
             <file>file:/Users/cosmicray/NetBeansProjects/BusinessManager/BusinessManager/src/serverpackage/SOK_1_SERVER.java</file>
             <file>file:/Users/cosmicray/NetBeansProjects/BusinessManager/BusinessManager/src/model/User.java</file>
             <file>file:/Users/cosmicray/NetBeansProjects/BusinessManager/BusinessManager/src/buyerpackage/BuyerJFrame.java</file>

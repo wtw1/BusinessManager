@@ -8,7 +8,7 @@ package buyerpackage;
 
 import java.io.PrintWriter;
 import java.net.Socket;
-
+import java.util.ArrayList;
 import model.User;
 import model.Users;
 
@@ -34,10 +34,10 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
     }
     
     @Override
-    public void newUserAdded(User x) {
+    public void newUserAdded(ArrayList x) {
         
-        sellersList.addUserToList(x);
-        System.out.println("dddd"+x.GetID());
+        sellersList.userslist = x;
+        //System.out.println("dddd"+x.GetID());
         reloadUsersBox();
     }
     

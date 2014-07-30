@@ -48,9 +48,9 @@ public class SOK_1_SERVER {
         String UserName = INPUT.nextLine();
         System.out.println(UserName);
         
+        Gson gson = new Gson();
         //convert the json string back to object
         try {
-        Gson gson = new Gson();
         User obj = gson.fromJson(UserName, User.class);
 	System.out.println(obj.GetID());
         
@@ -65,7 +65,9 @@ public class SOK_1_SERVER {
         for (int i=0; i < SOK_1_SERVER.ConnectionArray.size(); i++) {
             Socket TEMP_SOCK = (Socket) SOK_1_SERVER.ConnectionArray.get(i);
             PrintWriter OUT = new PrintWriter(TEMP_SOCK.getOutputStream());
-            OUT.println("#?!"+UserName);
+            
+            String json = gson.toJson(serverUsers.userslist);
+            OUT.println("#?!"+json);
             OUT.flush();
         }
         

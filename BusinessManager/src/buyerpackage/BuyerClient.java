@@ -2,10 +2,13 @@
 package buyerpackage;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import model.User;
+import model.Users;
 
 
 public class BuyerClient implements Runnable{
@@ -18,7 +21,7 @@ public class BuyerClient implements Runnable{
     private BuyerClientDelegate delegate;
     
     public interface BuyerClientDelegate {
-        void newUserAdded(User x);
+        void newUserAdded(ArrayList x);
     }
     
     public void setDelegate(BuyerClientDelegate delegate) {
@@ -64,9 +67,11 @@ public class BuyerClient implements Runnable{
                 System.out.println(MESSAGE);
                 try {
                     Gson gson = new Gson();
-                    User obj = gson.fromJson(MESSAGE, User.class);
-                    System.out.println(obj.GetID());
-                    delegate.newUserAdded(obj);
+                    //User[] mcArray = gson.fromJson(MESSAGE, User[].class);
+                    ArrayList<User> data = new Gson().fromJson(MESSAGE, new TypeToken<ArrayList<User>>(){}.getType());
+                    //ArrayList <User> obj = gson.fromJson(MESSAGE, ArrayList.class);
+                    //System.out.println(obj.GetID());
+                    delegate.newUserAdded(data);
                 } catch (Exception e) {System.out.println(e);}
             } else {
                 //update user
