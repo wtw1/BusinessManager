@@ -267,6 +267,11 @@ public class ItemManagerUI extends javax.swing.JPanel {
         jLabel17.setText("kg");
 
         jRemoveCountButton.setText("<");
+        jRemoveCountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRemoveCountButtonActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Count:");
 
@@ -283,6 +288,11 @@ public class ItemManagerUI extends javax.swing.JPanel {
         jLabel4.setText("Weight:");
 
         jAddCountButton.setText(">");
+        jAddCountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jAddCountButtonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Name:");
 
@@ -459,6 +469,22 @@ public class ItemManagerUI extends javax.swing.JPanel {
         this.setManagerState(ManagerState.NOTHINGSELECTED);
         this.delegate.itemManagerIsQuitEditMode();
     }//GEN-LAST:event_jDeleteItemButtonActionPerformed
+
+    private void jRemoveCountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRemoveCountButtonActionPerformed
+        // TODO add your handling code here:
+        int count = Integer.parseInt(jItemCountTF.getText());
+        if(count != 0){count--;
+        jItemCountTF.setText(Integer.toString(count));
+        }
+    }//GEN-LAST:event_jRemoveCountButtonActionPerformed
+
+    private void jAddCountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddCountButtonActionPerformed
+        // TODO add your handling code here:
+                int count = Integer.parseInt(jItemCountTF.getText());
+        count++;
+        jItemCountTF.setText(Integer.toString(count));
+        
+    }//GEN-LAST:event_jAddCountButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

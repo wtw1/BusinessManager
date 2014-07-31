@@ -47,8 +47,11 @@ public class Item {
     
     public void addCount() {
         itemCount++;
-        System.out.println(itemCount);
+     
     }
-    
+    public void remCount() {
+        if(itemCount != 0){ itemCount--;}
+     
+    }
     
 }
