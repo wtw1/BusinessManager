@@ -47,6 +47,7 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
     
     public void reloadUsersBox() {
         int keepSelected = jSellers.getSelectedIndex();
+        int selectedItem = jInventoryList.getSelectedIndex();
         
         String[] nameStrings = new String[sellersList.userslist.size()];
         for(int i=0;i<sellersList.userslist.size();i++) {
@@ -58,6 +59,7 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
         jSellers.setModel(new javax.swing.DefaultComboBoxModel(nameStrings));
         
         jSellers.setSelectedIndex(keepSelected);
+        jInventoryList.setSelectedIndex(selectedItem);
     }
     
     public void updateTableView() {
@@ -209,18 +211,20 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
 
     private void jBuyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuyButtonActionPerformed
         // TODO add your handling code here:
-        Item X = SelectedUser.inventory.getItemAtIndex(jInventoryList.getSelectedIndex());
-        X.itemCount = X.itemCount - 1;
-        upDateItemsPanel(X);
+        if (jInventoryList.getSelectedIndex() >= 0) {
+            Item X = SelectedUser.inventory.getItemAtIndex(jInventoryList.getSelectedIndex());
+            X.itemCount = X.itemCount - 1;
+            upDateItemsPanel(X);
         
-        Gson gson = new Gson();
-        String json = gson.toJson(sellersList.userslist);
-        buyerClient.SEND("#**"+json);
+            Gson gson = new Gson();
+            String json = gson.toJson(sellersList.userslist);
+            buyerClient.SEND("#**"+json);
+        }
     }//GEN-LAST:event_jBuyButtonActionPerformed
 
     private void upDateItemsPanel(Item X) {
         jItemName.setText(X.getItemName());
-        jItemPrice.setText("$"+Float.toString(X.itemBuyPrice));
+        jItemPrice.setText("$"+Float.toString(X.itemSellPrice));
         jItemCount.setText(Integer.toString(X.itemCount) + " Left");
     }
     

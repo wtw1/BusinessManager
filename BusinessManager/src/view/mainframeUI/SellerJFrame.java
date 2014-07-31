@@ -10,13 +10,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import model.Item;
 import model.User;
-//import view.initloginUI.InitLoginJDialog;
 import view.itemmanagerUI.ItemManagerUI;
 import view.itemspanelUI.ItemsPanelUI;
+import view.mainframeUI.AppClient.SellerClientDelegate;
 //import view.storeDialogUI.StoreDialogUI;
 
 public class SellerJFrame extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, 
-                                                               view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate {
+                                                               view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate,
+                                                               SellerClientDelegate{
     //private InitLoginJDialog login;
     public User currentUser; 
     public AppClient sellerClient;
@@ -32,6 +33,14 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
 //        itemsPanelUI1.updateTableView();
 //        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.ENABLED);
 //    }
+    
+    
+    public void updatedSeller(User aUser) {
+        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.DISABLED);
+        itemsPanelUI1.inventoryList = currentUser.inventory;
+        itemsPanelUI1.updateTableView();
+        itemsPanelUI1.setItemsPanelState(ItemsPanelUI.ItemsPaneState.ENABLED);
+    }
     
     
     //ItemManagerDelegate 
@@ -80,6 +89,7 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
         initComponents();
         itemManagerUI1.setDelegate(this);
         itemsPanelUI1.setDelegate(this);
+        
         
         //login = new InitLoginJDialog(this,true);
         //login.setDelegate(this);
@@ -286,6 +296,8 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
             
             
             sellerClient = new AppClient(SOCK);
+            sellerClient.currentUser = currentUser;
+            sellerClient.setDelegate(this);
             
             PrintWriter OUT = new PrintWriter(SOCK.getOutputStream());
             OUT.println("#?!"+this.currentUser.toJson());
@@ -305,5 +317,5 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
             } else System.out.println("Pls Login With a User.");
         }
     }
-    
+
 }

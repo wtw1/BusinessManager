@@ -20,7 +20,7 @@ public class InventoryList {
             item.itemName = "Random Item" + randomNum;
             item.itemCount = i;
             item.itemWeight = item.itemWeight*i;
-            item.itemBuyPrice = (float)((item.itemBuyPrice * i)+ 0.79); 
+            item.itemBuyPrice = (float)((item.itemSellPrice * i)+ 0.79); 
             
             list.add(item);
         }
