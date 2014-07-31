@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Item;
 import model.User;
 import model.Users;
@@ -211,14 +212,21 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
 
     private void jBuyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuyButtonActionPerformed
         // TODO add your handling code here:
-        if (jInventoryList.getSelectedIndex() >= 0) {
+        if (jInventoryList.getSelectedIndex() >= 0) {      
             Item X = SelectedUser.inventory.getItemAtIndex(jInventoryList.getSelectedIndex());
+              if(X.itemCount != 0)
+            {
             X.itemCount = X.itemCount - 1;
             upDateItemsPanel(X);
         
             Gson gson = new Gson();
             String json = gson.toJson(sellersList.userslist);
             buyerClient.SEND("#**"+json);
+            }
+              else
+              {
+              JOptionPane.showMessageDialog(null, "That item is out of stock.","Error",JOptionPane.ERROR_MESSAGE);
+              }
         }
     }//GEN-LAST:event_jBuyButtonActionPerformed
 
