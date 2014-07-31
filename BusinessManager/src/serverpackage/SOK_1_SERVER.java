@@ -11,7 +11,7 @@ import model.Users;
 public class SOK_1_SERVER {
     
     public static ArrayList<Socket> ConnectionArray = new ArrayList<Socket>();
-    public static ArrayList<String> CurrentUsers = new ArrayList<String>();
+    //public static ArrayList<String> CurrentUsers = new ArrayList<String>();
     public static Users serverUsers = new Users(); 
     
     public static void main(String[] args) throws Exception {
@@ -45,22 +45,36 @@ public class SOK_1_SERVER {
     
     public static void AddUserName(Socket X)throws IOException {
         Scanner INPUT = new Scanner(X.getInputStream()); 
-        String UserName = INPUT.nextLine();
-        System.out.println(UserName);
+        String intialInput = INPUT.nextLine();
+        System.out.println(intialInput);
         
         Gson gson = new Gson();
-        //convert the json string back to object
-        try {
-        User obj = gson.fromJson(UserName, User.class);
-	System.out.println(obj.GetID());
         
-        serverUsers.addUserToList(obj);
+        if(intialInput.contains("#?!")) { //SELLERCONNECTED WITH HIS INFO
+            intialInput = intialInput.replace("#?!", "");
+            //convert the json string back to object
+            try {
+                User obj = gson.fromJson(intialInput, User.class);
+                System.out.println(obj.GetID());
+            
+                serverUsers.addUserToList(obj);
         
-        //CurrentUsers.add(UserName);
-        //System.out.println(UserName);
-        } catch (Exception e) {
+                broadcastUpdatedSellers(); //UPDATE SELLERS TO BUYERS
+        
+            } catch (Exception e) {
 		System.out.println(e);
-	}
+            }
+        } else { //NEW BUYER CONNECTED
+                PrintWriter OUT = new PrintWriter(X.getOutputStream());
+                String json = gson.toJson(serverUsers.userslist);
+                OUT.println("#?!"+json);
+                OUT.flush();
+        }
+        
+    }
+    
+    public static void broadcastUpdatedSellers()throws IOException {
+        Gson gson = new Gson();
         
         for (int i=0; i < SOK_1_SERVER.ConnectionArray.size(); i++) {
             Socket TEMP_SOCK = (Socket) SOK_1_SERVER.ConnectionArray.get(i);
@@ -70,7 +84,6 @@ public class SOK_1_SERVER {
             OUT.println("#?!"+json);
             OUT.flush();
         }
-        
         
     }
    

@@ -1,9 +1,13 @@
 package serverpackage;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
+import model.User;
 
 
 public class Server_Return implements Runnable{
@@ -63,9 +67,17 @@ public class Server_Return implements Runnable{
                     
                     System.out.println("Client Said: " + MESSAGE); //after intial push
                     
+                    if(MESSAGE.contains("#**")) { //SOMETHING WAS BOUGHT
+                        //set users
+                        MESSAGE = MESSAGE.replace("#**", "");
+                        ArrayList<User> data = new Gson().fromJson(MESSAGE, new TypeToken<ArrayList<User>>(){}.getType());
+                        SOK_1_SERVER.serverUsers.userslist = data;
+                        SOK_1_SERVER.broadcastUpdatedSellers();
+                    }
                     for (int i=0; i<SOK_1_SERVER.ConnectionArray.size();i++) {
                         Socket TEMP_SOCK = SOK_1_SERVER.ConnectionArray.get(i);
                         PrintWriter TEMP_OUT = new PrintWriter(TEMP_SOCK.getOutputStream());
+                        
                         TEMP_OUT.println(MESSAGE);
                         TEMP_OUT.flush();
                         System.out.println("Sent to: " + TEMP_SOCK.getLocalAddress().getHostName()); 

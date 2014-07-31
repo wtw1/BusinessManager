@@ -8,7 +8,6 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import model.User;
-import model.Users;
 
 
 public class BuyerClient implements Runnable{
@@ -65,12 +64,8 @@ public class BuyerClient implements Runnable{
                 //set users
                 MESSAGE = MESSAGE.replace("#?!", "");
                 System.out.println(MESSAGE);
-                try {
-                    Gson gson = new Gson();
-                    //User[] mcArray = gson.fromJson(MESSAGE, User[].class);
+                try {                    
                     ArrayList<User> data = new Gson().fromJson(MESSAGE, new TypeToken<ArrayList<User>>(){}.getType());
-                    //ArrayList <User> obj = gson.fromJson(MESSAGE, ArrayList.class);
-                    //System.out.println(obj.GetID());
                     delegate.newUserAdded(data);
                 } catch (Exception e) {System.out.println(e);}
             } else {

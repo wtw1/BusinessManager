@@ -10,14 +10,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import model.Item;
 import model.User;
-import view.initloginUI.InitLoginJDialog;
+//import view.initloginUI.InitLoginJDialog;
 import view.itemmanagerUI.ItemManagerUI;
 import view.itemspanelUI.ItemsPanelUI;
 //import view.storeDialogUI.StoreDialogUI;
 
 public class SellerJFrame extends javax.swing.JFrame implements view.itemmanagerUI.ItemManagerUI.ItemManagerDelegate, 
                                                                view.itemspanelUI.ItemsPanelUI.ItemsPanelDelegate {
-    private InitLoginJDialog login;
+    //private InitLoginJDialog login;
     public User currentUser; 
     public AppClient sellerClient;
     
@@ -81,7 +81,7 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
         itemManagerUI1.setDelegate(this);
         itemsPanelUI1.setDelegate(this);
         
-        login = new InitLoginJDialog(this,true);
+        //login = new InitLoginJDialog(this,true);
         //login.setDelegate(this);
     }
         
@@ -288,7 +288,7 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
             sellerClient = new AppClient(SOCK);
             
             PrintWriter OUT = new PrintWriter(SOCK.getOutputStream());
-            OUT.println(this.currentUser.toJson());
+            OUT.println("#?!"+this.currentUser.toJson());
             OUT.flush();
             
             Thread X = new Thread(sellerClient);
@@ -301,7 +301,7 @@ public class SellerJFrame extends javax.swing.JFrame implements view.itemmanager
         }
         } else {
             if(currentUser != null && sellerClient != null) {
-                sellerClient.SEND(this.currentUser.toJson());
+                //sellerClient.SEND(this.currentUser.toJson());
             } else System.out.println("Pls Login With a User.");
         }
     }

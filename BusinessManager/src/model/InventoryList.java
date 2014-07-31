@@ -5,7 +5,7 @@ import java.util.*;
 
 public class InventoryList {
     
-    ArrayList list; //= new ArrayList();
+    ArrayList<Item> list; //= new ArrayList();
     
     public InventoryList() {
         list = new ArrayList();
@@ -13,9 +13,15 @@ public class InventoryList {
         //TESTING
         for (int i=0; i<5; i++){
             Item item = new Item();
-            item.itemName = "Random Item" + i;
+            
+            Random rand = new Random();
+            int randomNum = rand.nextInt((2000 - 10) + 1) + 10;
+            
+            item.itemName = "Random Item" + randomNum;
             item.itemCount = i;
             item.itemWeight = item.itemWeight*i;
+            item.itemBuyPrice = (float)((item.itemBuyPrice * i)+ 0.79); 
+            
             list.add(item);
         }
     }

@@ -6,9 +6,11 @@
 
 package buyerpackage;
 
+import com.google.gson.Gson;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import model.Item;
 import model.User;
 import model.Users;
 
@@ -21,6 +23,8 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
 
     public BuyerClient buyerClient;
     public Users sellersList;
+    public User SelectedUser;
+    public Boolean disable = false;
     /**
      * Creates new form BuyerJFrame
      */
@@ -42,6 +46,7 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
     }
     
     public void reloadUsersBox() {
+        int keepSelected = jSellers.getSelectedIndex();
         
         String[] nameStrings = new String[sellersList.userslist.size()];
         for(int i=0;i<sellersList.userslist.size();i++) {
@@ -51,6 +56,28 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
         }
         
         jSellers.setModel(new javax.swing.DefaultComboBoxModel(nameStrings));
+        
+        jSellers.setSelectedIndex(keepSelected);
+    }
+    
+    public void updateTableView() {
+        
+        SelectedUser = sellersList.getUserAtIndex(jSellers.getSelectedIndex());
+//        InventoryList selectedInventory = SelectedUser.inventory;
+//        SelectedUser.inventory.getSize();
+//        System.out.println(SelectedUser.inventory.getItemAtIndex(0).itemName);
+        
+        System.out.println("aaaa"+SelectedUser.GetID());
+        jInventoryList.setModel(new javax.swing.AbstractListModel() {
+            public int getSize() { 
+                return SelectedUser.inventory.getSize(); 
+            }
+            public Object getElementAt(int i) { 
+                return SelectedUser.inventory.getItemAtIndex(i).getItemName();
+            }
+        });
+        
+        this.disable = false;
     }
 
     /**
@@ -65,20 +92,76 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
         jSellers = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jInventoryList = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jBuyButton = new javax.swing.JButton();
+        jItemName = new javax.swing.JLabel();
+        jItemPrice = new javax.swing.JLabel();
+        jItemCount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jSellers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jSellers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSellersActionPerformed(evt);
+            }
+        });
 
         jInventoryList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        jInventoryList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jInventoryListValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jInventoryList);
 
-        jButton1.setText("Buy");
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jBuyButton.setText("Buy");
+        jBuyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBuyButtonActionPerformed(evt);
+            }
+        });
+
+        jItemName.setText("iPad Mini");
+
+        jItemPrice.setText("$320.99");
+
+        jItemCount.setText("5 Left");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 153, Short.MAX_VALUE)
+                        .addComponent(jBuyButton))
+                    .addComponent(jItemName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jItemPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jItemCount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jItemName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jItemPrice)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jItemCount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBuyButton))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,9 +173,9 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addComponent(jSellers, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jButton1)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,15 +183,47 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
                 .addContainerGap()
                 .addComponent(jSellers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jSellersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSellersActionPerformed
+        // TODO add your handling code here:
+        this.disable = true;
+        jInventoryList.clearSelection();
+        updateTableView();
+    }//GEN-LAST:event_jSellersActionPerformed
+
+    private void jInventoryListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jInventoryListValueChanged
+        // TODO add your handling code here:
+        if (!this.disable){
+            Item X = SelectedUser.inventory.getItemAtIndex(jInventoryList.getSelectedIndex());
+            upDateItemsPanel(X);
+        }
+    }//GEN-LAST:event_jInventoryListValueChanged
+
+    private void jBuyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuyButtonActionPerformed
+        // TODO add your handling code here:
+        Item X = SelectedUser.inventory.getItemAtIndex(jInventoryList.getSelectedIndex());
+        X.itemCount = X.itemCount - 1;
+        upDateItemsPanel(X);
+        
+        Gson gson = new Gson();
+        String json = gson.toJson(sellersList.userslist);
+        buyerClient.SEND("#**"+json);
+    }//GEN-LAST:event_jBuyButtonActionPerformed
+
+    private void upDateItemsPanel(Item X) {
+        jItemName.setText(X.getItemName());
+        jItemPrice.setText("$"+Float.toString(X.itemBuyPrice));
+        jItemCount.setText(Integer.toString(X.itemCount) + " Left");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -146,8 +261,12 @@ public class BuyerJFrame extends javax.swing.JFrame implements BuyerClient.Buyer
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBuyButton;
     private javax.swing.JList jInventoryList;
+    private javax.swing.JLabel jItemCount;
+    private javax.swing.JLabel jItemName;
+    private javax.swing.JLabel jItemPrice;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox jSellers;
     // End of variables declaration//GEN-END:variables
