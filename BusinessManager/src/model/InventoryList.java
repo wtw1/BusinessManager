@@ -3,10 +3,17 @@ package model;
 
 import java.util.*;
 
+/**
+ *InventoryList contains all the items being sold by a seller, and all items that a buyer can buy.
+ * @author Owner
+ */
 public class InventoryList {
     
     ArrayList<Item> list; //= new ArrayList();
     
+    /**
+     * constructor function. Makes a new ArrayList
+     */
     public InventoryList() {
         list = new ArrayList();
         
@@ -26,23 +33,44 @@ public class InventoryList {
         }
     }
     
+    /**
+     * Getter for the list instance.
+     * @return
+     */
     public ArrayList getList() {
         return list;
     }
     
+    /**
+     * Getter for the size of this list instance
+     * @return
+     */
     public int getSize() {
         return list.size();
     }
     
+    /**
+     * Adds an item to the list.
+     * @param item
+     */
     public void addNewItem (Item item) {
         list.add(item);
     } 
     
+    /**
+     * Returns the item at the given index.
+     * @param index
+     * @return
+     */
     public Item getItemAtIndex (int index){
         Item item = (Item)list.get(index);
         return item;
     }
     
+    /**
+     * Removes the item at the specified index.
+     * @param index
+     */
     public void removeItemAtIndex (int index) {
         list.remove(index);
     }

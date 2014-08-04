@@ -6,16 +6,49 @@
 
 package model;
 
+/**
+ * This class defines the attributes of an item. Instances of this class go in ArrayList
+ * @author Owner
+ */
 public class Item {
     
+    /**
+     * Property: sell price
+     */
     public float itemSellPrice;
+
+    /**
+     * Property: buy price
+     */
     public float itemBuyPrice;
+
+    /**
+     * Property: weight
+     */
     public float itemWeight;
+
+    /**
+     * Property: quantity
+     */
     public int itemCount;
+
+    /**
+     * Property: name of item
+     */
     public String itemName;
     
-    // constructor
-    public Item(float sellPrice, float buyPrice, int ID, String name, float weight,int count) {
+   
+
+     /**
+     * constructor
+     * @param sellPrice
+     * @param buyPrice
+     * @param ID
+     * @param name
+     * @param weight
+     * @param count
+     */
+        public Item(float sellPrice, float buyPrice, int ID, String name, float weight,int count) {
         itemSellPrice = sellPrice;
         itemBuyPrice = buyPrice;
         itemWeight = weight;
@@ -24,6 +57,10 @@ public class Item {
         itemName = name;
     }
     
+    /**
+     * Setter for combined attributes of an item
+     * @param item
+     */
     public void transformIntoItem(Item item){
         this.itemName = item.itemName;
         this.itemSellPrice = item.itemSellPrice;
@@ -32,6 +69,9 @@ public class Item {
         this.itemCount = item.itemCount;
     }
    
+    /**
+     *A default constructor
+     */
     public Item() {
         itemSellPrice = 1.25f;
         itemBuyPrice = 1.10f;
@@ -41,14 +81,25 @@ public class Item {
         itemName = "Random Item";
     }
     
+    /**
+     * Getter function.
+     * @return
+     */
     public String getItemName() {
         return itemName;
     }
     
+    /**
+     * Incrementer.
+     */
     public void addCount() {
         itemCount++;
      
     }
+
+    /**
+     * Decrementer.
+     */
     public void remCount() {
         if(itemCount != 0){ itemCount--;}
      
